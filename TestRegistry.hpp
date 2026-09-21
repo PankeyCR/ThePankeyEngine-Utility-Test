@@ -42,12 +42,13 @@ namespace pankey{
 				pankey_test_registry().add(a_function);
 			}
 
-			#define PANKEY_TEST_REGISTER(FUNCTION) \
-				static bool pankey_test_registered_##__LINE__ = \
-					(pankey_register_test(FUNCTION), true);
-
 		}
 
 	}
 
 }
+
+#define PANKEY_TEST_REGISTER(FUNCTION) \
+	static bool pankey_test_registered_##__LINE__ = \
+		(pankey::Utility::Test::pankey_register_test(FUNCTION), true);
+
