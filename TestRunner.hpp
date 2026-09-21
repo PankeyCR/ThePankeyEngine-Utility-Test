@@ -30,14 +30,19 @@ namespace pankey{
 						m_omit_info = a_omit;
 					}
 
-					void test(void(*a_result)(TestResult&)){
-						TestRunnerLog(pankey_Log_StartMethod, "run", "");
+					void test(const CharPointer& a_test_name, void(*a_result)(TestResult&)){
+						TestRunnerLog(pankey_Log_StartMethod, "run", a_test_name);
 
 						TestResult i_result;
 						a_result(i_result);
-						m_errors = addLine(m_errors, i_result.getResult());
+						CharPointer i_result_string = i_result.getResult();
+						if(!i_result_string.isEmpty()){
+							CharPointer i_error_line = concat("Test Name: ", a_test_name);
+							m_errors = addLine(m_errors, i_error_line);
+							m_errors = addLine(m_errors, i_result_string);
+						}
 
-						TestRunnerLog(pankey_Log_EndMethod, "run", "");
+						TestRunnerLog(pankey_Log_EndMethod, "run", a_test_name);
 					}
 					
 					void errors(void(*a_error)(int, const CharPointer&)){
