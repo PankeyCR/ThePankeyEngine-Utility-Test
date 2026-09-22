@@ -49,6 +49,5 @@ namespace pankey{
 }
 
 #define PANKEY_TEST_REGISTER(FUNCTION) \
-	static bool pankey_test_registered_##__LINE__ = \
+	static bool pankey_test_registered_##FUNCTION = \
 		(pankey::Utility::Test::pankey_register_test(FUNCTION), true);
-
